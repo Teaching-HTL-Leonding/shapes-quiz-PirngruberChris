@@ -1,0 +1,56 @@
+﻿<Window x:Class="Shapes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shapes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="TextBoxAdd" TargetType="TextBox">
+            <Setter Property="MinWidth" Value="50"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0" Margin="5,5,5,5">
+            <ComboBox x:Name="comboBox" Width="80">
+                <ComboBoxItem IsSelected="True">Circle</ComboBoxItem>
+                <ComboBoxItem>Rectangle</ComboBoxItem>
+                <ComboBoxItem>Triangle</ComboBoxItem>
+            </ComboBox>
+            <TextBlock Text="Radius: "/>
+            <TextBox x:Name="textBoxRadius" Style="{StaticResource ResourceKey=TextBoxAdd}"/>
+            <TextBlock Text="A Side: "/>
+            <TextBox x:Name="textBoxASide" Style="{StaticResource ResourceKey=TextBoxAdd}"/>
+            <TextBlock Text="B Side: "/>
+            <TextBox x:Name="textBoxBSide" Style="{StaticResource ResourceKey=TextBoxAdd}"/>
+            <TextBlock Text="Height: "/>
+            <TextBox x:Name="textBoxHeight" Style="{StaticResource ResourceKey=TextBoxAdd}"/>
+            <Button Click="Add_Button">Add</Button>
+        </WrapPanel>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=ListOfShapes}" AutoGenerateColumns="False" IsReadOnly="True"
+                      CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" MinWidth="100" />
+                <DataGridTextColumn Header="Radius" Binding="{Binding Path=Radius}" MinWidth="100" />
+                <DataGridTextColumn Header="A Side" Binding="{Binding Path=ASide}" MinWidth="100" />
+                <DataGridTextColumn Header="B Side" Binding="{Binding Path=BSide}" MinWidth="100" />
+                <DataGridTextColumn Header="Height" Binding="{Binding Path=Height}" MinWidth="100" />
+                <DataGridTextColumn Header="Area" Binding="{Binding Path=Area}" MinWidth="100" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <WrapPanel Grid.Row="2" Margin="5,5,5,5">
+            <TextBlock Text="Gesamte Fläche: "/>
+            <TextBlock x:Name="textBlockArea" Text="0"/>
+        </WrapPanel>
+    </Grid>
+</Window>
